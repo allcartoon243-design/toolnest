@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script type="module" src="app.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ToolNest – Free Online PDF & Image Tools</title>
@@ -487,39 +488,21 @@ async function convertToPDF() {
   btn.innerHTML = 'Convert to PDF'; btn.disabled = false;
 }
 
-// BACKGROUND REMOVER — NEW AI VERSION
-let bgImgFile = null;
+// Naya Background Remover Logic
 function bgLoad(e) {
-  bgImgFile = e.target.files[0];
-  if (!bgImgFile) return;
+  const file = e.target.files[0];
+  if (!file) return;
+  
   const reader = new FileReader();
   reader.onload = (ev) => {
     const preview = document.getElementById('bgPreview');
     preview.src = ev.target.result;
     preview.classList.add('show');
-    document.getElementById('bgStatus').style.display = 'block';
-    document.getElementById('bgResult').classList.remove('show');
-    if (window._removeBgAI) {
-      window._removeBgAI(ev.target.result);
-    } else {
-      setTimeout(() => {
-        if (window._removeBgAI) window._removeBgAI(ev.target.result);
-        else document.getElementById('bgStatusText').textContent = 'Error loading AI. Please refresh and try again.';
-      }, 3000);
-    }
+    
+    // Ab ye direct app.js ke handleBgRemove function ko call karega
+    window.handleBgRemove(file);
   };
-  reader.readAsDataURL(bgImgFile);
-}
-function showBgResult(resultUrl) {
-  document.getElementById('bgStatus').style.display = 'none';
-  document.getElementById('bgOutput').src = resultUrl;
-  document.getElementById('bgResult').classList.add('show');
-  document.getElementById('bgDown').onclick = () => {
-    const a = document.createElement('a');
-    a.href = resultUrl;
-    a.download = 'toolnest-nobg.png';
-    a.click();
-  };
+  reader.readAsDataURL(file);
 }
 
 // IMAGE CONVERTER
