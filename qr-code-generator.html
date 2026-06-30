@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>QR Code Generator – Free Online Tool | ToolNest</title>
+  <meta name="description" content="Generate free QR codes for URLs, text, WiFi, and more. Customize colors and download instantly. No signup, 100% browser-based."/>
+  <link rel="canonical" href="https://toolnest-steel.vercel.app/tools/qr-code-generator"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+  <script src="https://pl30116577.effectivecpmnetwork.com/76/b5/bb/76b5bbd94501d12ae8d6648b945fb7eb.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg: #0a0a0f; --surface: #13131a; --surface2: #1c1c28; --border: #2a2a3a; --accent: #6c63ff; --accent2: #a78bfa; --green: #22d3a5; --text: #f0f0f8; --muted: #8888aa; --radius: 14px; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; }
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(10,10,15,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 24px; display: flex; align-items: center; gap: 12px; height: 60px; }
+    .logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.3rem; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
+    .nav-sep { color: var(--border); }
+    .nav-current { color: var(--muted); font-size: 0.85rem; }
+    .back-btn { margin-left: auto; color: var(--muted); font-size: 0.82rem; text-decoration: none; border: 1px solid var(--border); padding: 5px 12px; border-radius: 8px; transition: all 0.2s; }
+    .back-btn:hover { border-color: var(--accent); color: var(--accent2); }
+    main { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+    .tool-badge { display: inline-flex; background: rgba(108,99,255,0.12); border: 1px solid rgba(108,99,255,0.3); color: var(--accent2); font-size: 0.75rem; font-weight: 600; padding: 4px 12px; border-radius: 99px; margin-bottom: 12px; letter-spacing: 0.04em; }
+    h1 { font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+    .tool-desc { color: var(--muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 32px; }
+    .type-tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .type-tab { padding: 9px 16px; border-radius: 99px; font-size: 0.82rem; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: var(--surface2); color: var(--muted); transition: all 0.2s; }
+    .type-tab.active { border-color: var(--accent); color: var(--accent2); background: rgba(108,99,255,0.1); }
+    .form-group { margin-bottom: 18px; }
+    .form-label { font-size: 0.82rem; font-weight: 600; color: var(--muted); margin-bottom: 8px; display: block; letter-spacing: 0.04em; text-transform: uppercase; }
+    .form-input, .form-textarea { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 11px 14px; color: var(--text); font-family: inherit; font-size: 0.92rem; outline: none; transition: border-color 0.2s; }
+    .form-input:focus, .form-textarea:focus { border-color: var(--accent); }
+    .form-textarea { resize: vertical; min-height: 80px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .color-row { display: flex; align-items: center; gap: 10px; }
+    .color-row input[type=color] { width: 44px; height: 38px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface2); cursor: pointer; padding: 2px; }
+    .color-row span { font-size: 0.85rem; color: var(--muted); font-family: monospace; }
+    .qr-preview-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; text-align: center; margin-top: 24px; }
+    #qrCanvas { max-width: 100%; border-radius: 8px; }
+    .qr-placeholder { color: var(--muted); font-size: 0.88rem; padding: 60px 20px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; border-radius: 10px; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.2s; border: none; }
+    .btn-success { background: linear-gradient(135deg, var(--green), #10b981); color: #0a0a0f; }
+    .download-row { display: flex; gap: 10px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
+    .ad-slot { background: var(--surface); border: 1px dashed var(--border); border-radius: var(--radius); padding: 12px; text-align: center; color: var(--muted); font-size: 0.75rem; min-height: 90px; display: flex; align-items: center; justify-content: center; margin: 32px 0; }
+    footer { text-align: center; padding: 32px 24px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.82rem; }
+    footer a { color: var(--accent2); text-decoration: none; }
+    @media(max-width:500px) { .grid-2 { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="/">🛠 ToolNest</a>
+  <span class="nav-sep">/</span>
+  <span class="nav-current">QR Code Generator</span>
+  <a class="back-btn" href="/">← All Tools</a>
+</nav>
+<main>
+  <div class="tool-badge">✨ Free Tool</div>
+  <h1>🔲 QR Code Generator</h1>
+  <p class="tool-desc">Create free QR codes for links, text, WiFi, or contact info. Customize colors and download instantly.</p>
+
+  <div class="type-tabs">
+    <div class="type-tab active" onclick="setType(this,'url')">🔗 URL</div>
+    <div class="type-tab" onclick="setType(this,'text')">📝 Text</div>
+    <div class="type-tab" onclick="setType(this,'wifi')">📶 WiFi</div>
+    <div class="type-tab" onclick="setType(this,'email')">✉️ Email</div>
+  </div>
+
+  <!-- URL / TEXT -->
+  <div id="simpleArea">
+    <div class="form-group">
+      <label class="form-label" id="simpleLabel">Website URL</label>
+      <textarea class="form-textarea" id="simpleInput" placeholder="https://example.com" oninput="generateQR()"></textarea>
+    </div>
+  </div>
+
+  <!-- WIFI -->
+  <div id="wifiArea" style="display:none;">
+    <div class="form-group">
+      <label class="form-label">Network Name (SSID)</label>
+      <input class="form-input" id="wifiSSID" placeholder="My WiFi Network" oninput="generateQR()"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Password</label>
+      <input class="form-input" id="wifiPass" placeholder="WiFi password" oninput="generateQR()"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Security Type</label>
+      <select class="form-input" id="wifiSec" onchange="generateQR()">
+        <option value="WPA">WPA/WPA2</option>
+        <option value="WEP">WEP</option>
+        <option value="nopass">No Password</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- EMAIL -->
+  <div id="emailArea" style="display:none;">
+    <div class="form-group">
+      <label class="form-label">Email Address</label>
+      <input class="form-input" id="emailTo" placeholder="someone@example.com" oninput="generateQR()"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Subject (optional)</label>
+      <input class="form-input" id="emailSubject" placeholder="Subject line" oninput="generateQR()"/>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Colors</label>
+    <div class="grid-2">
+      <div class="color-row">
+        <input type="color" id="fgColor" value="#000000" oninput="generateQR()"/>
+        <span>Foreground</span>
+      </div>
+      <div class="color-row">
+        <input type="color" id="bgColor" value="#ffffff" oninput="generateQR()"/>
+        <span>Background</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Size: <span id="sizeVal">300</span>px</label>
+    <input type="range" class="form-input" id="qrSize" min="150" max="600" step="50" value="300" oninput="document.getElementById('sizeVal').textContent=this.value;generateQR()"/>
+  </div>
+
+  <div class="qr-preview-wrap">
+    <canvas id="qrCanvas" style="display:none;"></canvas>
+    <div class="qr-placeholder" id="qrPlaceholder">Enter content above to generate your QR code</div>
+    <div class="download-row" id="downloadRow" style="display:none;">
+      <button class="btn btn-success" onclick="downloadQR('png')">⬇ Download PNG</button>
+    </div>
+  </div>
+
+  <div class="ad-slot">Advertisement</div>
+</main>
+<footer>
+  <p>© 2026 <strong style="color:var(--text)">ToolNest</strong> · <a href="/">All Tools</a> · <a href="#">Privacy Policy</a></p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+let currentType = 'url';
+let qrInstance = null;
+
+function setType(el, type) {
+  currentType = type;
+  document.querySelectorAll('.type-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+
+  document.getElementById('simpleArea').style.display = (type === 'url' || type === 'text') ? 'block' : 'none';
+  document.getElementById('wifiArea').style.display = type === 'wifi' ? 'block' : 'none';
+  document.getElementById('emailArea').style.display = type === 'email' ? 'block' : 'none';
+
+  const label = document.getElementById('simpleLabel');
+  const input = document.getElementById('simpleInput');
+  if (type === 'url') { label.textContent = 'Website URL'; input.placeholder = 'https://example.com'; }
+  if (type === 'text') { label.textContent = 'Text Content'; input.placeholder = 'Type anything you want to encode...'; }
+
+  generateQR();
+}
+
+function buildContent() {
+  if (currentType === 'url') {
+    let v = document.getElementById('simpleInput').value.trim();
+    if (v && !/^https?:\/\//i.test(v)) v = 'https://' + v;
+    return v;
+  }
+  if (currentType === 'text') {
+    return document.getElementById('simpleInput').value.trim();
+  }
+  if (currentType === 'wifi') {
+    const ssid = document.getElementById('wifiSSID').value.trim();
+    const pass = document.getElementById('wifiPass').value.trim();
+    const sec = document.getElementById('wifiSec').value;
+    if (!ssid) return '';
+    return `WIFI:T:${sec};S:${ssid};P:${pass};;`;
+  }
+  if (currentType === 'email') {
+    const to = document.getElementById('emailTo').value.trim();
+    const subject = document.getElementById('emailSubject').value.trim();
+    if (!to) return '';
+    return `mailto:${to}${subject ? '?subject=' + encodeURIComponent(subject) : ''}`;
+  }
+  return '';
+}
+
+function generateQR() {
+  const content = buildContent();
+  const canvas = document.getElementById('qrCanvas');
+  const placeholder = document.getElementById('qrPlaceholder');
+  const downloadRow = document.getElementById('downloadRow');
+
+  if (!content) {
+    canvas.style.display = 'none';
+    placeholder.style.display = 'block';
+    downloadRow.style.display = 'none';
+    return;
+  }
+
+  const size = parseInt(document.getElementById('qrSize').value);
+  const fg = document.getElementById('fgColor').value;
+  const bg = document.getElementById('bgColor').value;
+
+  // Use a hidden container to generate via qrcode.js, then draw to our visible canvas
+  const tempDiv = document.createElement('div');
+  new QRCode(tempDiv, {
+    text: content,
+    width: size,
+    height: size,
+    colorDark: fg,
+    colorLight: bg,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+
+  setTimeout(() => {
+    const img = tempDiv.querySelector('img') || tempDiv.querySelector('canvas');
+    if (!img) return;
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext('2d');
+    if (img.tagName === 'CANVAS') {
+      ctx.drawImage(img, 0, 0, size, size);
+      canvas.style.display = 'block';
+      placeholder.style.display = 'none';
+      downloadRow.style.display = 'flex';
+    } else {
+      img.onload = () => {
+        ctx.drawImage(img, 0, 0, size, size);
+        canvas.style.display = 'block';
+        placeholder.style.display = 'none';
+        downloadRow.style.display = 'flex';
+      };
+      if (img.complete) img.onload();
+    }
+  }, 80);
+}
+
+function downloadQR(format) {
+  const canvas = document.getElementById('qrCanvas');
+  const url = canvas.toDataURL('image/png');
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'toolnest-qrcode.png';
+  a.click();
+}
+</script>
+</body>
+</html>
