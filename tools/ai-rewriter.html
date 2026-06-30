@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Text Rewriter – Free Online Tool | ToolNest</title>
+  <meta name="description" content="Free AI-powered text rewriter. Paraphrase, fix grammar, change tone, make text shorter or longer. No signup required."/>
+  <link rel="canonical" href="https://toolnest-steel.vercel.app/tools/ai-rewriter"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+  <script src="https://pl30116577.effectivecpmnetwork.com/76/b5/bb/76b5bbd94501d12ae8d6648b945fb7eb.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg: #0a0a0f; --surface: #13131a; --surface2: #1c1c28; --border: #2a2a3a; --accent: #6c63ff; --accent2: #a78bfa; --green: #22d3a5; --text: #f0f0f8; --muted: #8888aa; --radius: 14px; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; }
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(10,10,15,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 24px; display: flex; align-items: center; gap: 12px; height: 60px; }
+    .logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.3rem; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
+    .nav-sep { color: var(--border); }
+    .nav-current { color: var(--muted); font-size: 0.85rem; }
+    .back-btn { margin-left: auto; color: var(--muted); font-size: 0.82rem; text-decoration: none; border: 1px solid var(--border); padding: 5px 12px; border-radius: 8px; transition: all 0.2s; }
+    .back-btn:hover { border-color: var(--accent); color: var(--accent2); }
+    main { max-width: 900px; margin: 0 auto; padding: 48px 24px 80px; }
+    .tool-badge { display: inline-flex; background: rgba(108,99,255,0.12); border: 1px solid rgba(108,99,255,0.3); color: var(--accent2); font-size: 0.75rem; font-weight: 600; padding: 4px 12px; border-radius: 99px; margin-bottom: 12px; letter-spacing: 0.04em; }
+    h1 { font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+    .tool-desc { color: var(--muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 28px; }
+    .mode-wrap { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+    .mode-btn { padding: 8px 16px; border-radius: 99px; font-size: 0.82rem; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: var(--surface2); color: var(--muted); transition: all 0.2s; }
+    .mode-btn.active { border-color: var(--accent); color: var(--accent2); background: rgba(108,99,255,0.12); }
+    .editor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media(max-width: 640px) { .editor-grid { grid-template-columns: 1fr; } }
+    .editor-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+    .editor-header { padding: 10px 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .editor-label { font-size: 0.78rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .char-count { font-size: 0.75rem; color: var(--muted); }
+    .icon-btn { background: none; border: none; cursor: pointer; color: var(--muted); font-size: 1rem; padding: 2px 6px; border-radius: 6px; transition: all 0.2s; }
+    .icon-btn:hover { color: var(--accent2); background: rgba(108,99,255,0.1); }
+    textarea { width: 100%; min-height: 260px; background: transparent; border: none; outline: none; resize: none; padding: 16px; color: var(--text); font-family: 'Inter', sans-serif; font-size: 0.92rem; line-height: 1.7; }
+    .result-area { width: 100%; min-height: 260px; padding: 16px; color: var(--text); font-size: 0.92rem; line-height: 1.7; white-space: pre-wrap; word-break: break-word; }
+    .result-placeholder { color: var(--muted); font-style: italic; }
+    .btn-row { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 28px; border-radius: 10px; font-weight: 600; font-size: 0.92rem; cursor: pointer; transition: all 0.2s; border: none; }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), #8b5cf6); color: white; flex: 1; }
+    .btn-primary:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(108,99,255,0.35); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--muted); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent2); }
+    .spinner { width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; display: inline-block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .error-box { display: none; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.25); border-radius: 10px; padding: 12px 16px; margin-top: 12px; color: #ff8080; font-size: 0.88rem; }
+    .error-box.show { display: block; }
+    .info-strip { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 32px; }
+    .info-chip { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 10px 16px; font-size: 0.78rem; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+    .ad-slot { background: var(--surface); border: 1px dashed var(--border); border-radius: var(--radius); padding: 12px; text-align: center; color: var(--muted); font-size: 0.75rem; min-height: 90px; display: flex; align-items: center; justify-content: center; margin: 32px 0; }
+    footer { text-align: center; padding: 32px 24px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.82rem; }
+    footer a { color: var(--accent2); text-decoration: none; }
+  </style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="/">🛠 ToolNest</a>
+  <span class="nav-sep">/</span>
+  <span class="nav-current">AI Rewriter</span>
+  <a class="back-btn" href="/">← All Tools</a>
+</nav>
+<main>
+  <div class="tool-badge">🤖 AI Powered</div>
+  <h1>✍️ AI Text Rewriter</h1>
+  <p class="tool-desc">Paraphrase, fix grammar, change tone, or expand your text using AI. Free, instant, no signup required.</p>
+
+  <div class="mode-wrap">
+    <button class="mode-btn active" onclick="setMode(this,'paraphrase')">🔄 Paraphrase</button>
+    <button class="mode-btn" onclick="setMode(this,'grammar')">✅ Fix Grammar</button>
+    <button class="mode-btn" onclick="setMode(this,'formal')">👔 Make Formal</button>
+    <button class="mode-btn" onclick="setMode(this,'casual')">😊 Make Casual</button>
+    <button class="mode-btn" onclick="setMode(this,'shorter')">✂️ Make Shorter</button>
+    <button class="mode-btn" onclick="setMode(this,'longer')">📝 Make Longer</button>
+  </div>
+
+  <div class="editor-grid">
+    <div class="editor-box">
+      <div class="editor-header">
+        <span class="editor-label">Your Text</span>
+        <span class="char-count"><span id="charCount">0</span> / 5000</span>
+      </div>
+      <textarea id="inputText" placeholder="Type or paste your text here..." oninput="updateCount()"></textarea>
+    </div>
+    <div class="editor-box">
+      <div class="editor-header">
+        <span class="editor-label">AI Result</span>
+        <button class="icon-btn" onclick="copyResult()" title="Copy result">📋</button>
+      </div>
+      <div class="result-area" id="resultArea">
+        <span class="result-placeholder">Your rewritten text will appear here...</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="error-box" id="errorBox"></div>
+
+  <div class="btn-row">
+    <button class="btn btn-primary" id="rewriteBtn" onclick="rewriteText()">✨ Rewrite Text</button>
+    <button class="btn btn-outline" onclick="clearAll()">Clear</button>
+  </div>
+
+  <div class="info-strip">
+    <div class="info-chip">⚡ Powered by Gemini AI</div>
+    <div class="info-chip">🔒 Text not stored anywhere</div>
+    <div class="info-chip">📏 Max 5000 characters</div>
+  </div>
+
+  <div class="ad-slot">Advertisement</div>
+</main>
+<footer>
+  <p>© 2026 <strong style="color:var(--text)">ToolNest</strong> · <a href="/">All Tools</a> · <a href="#">Privacy Policy</a></p>
+</footer>
+<script>
+let currentMode = 'paraphrase';
+
+function setMode(el, mode) {
+  currentMode = mode;
+  document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function updateCount() {
+  const len = document.getElementById('inputText').value.length;
+  document.getElementById('charCount').textContent = len;
+  document.getElementById('charCount').style.color = len > 4500 ? '#ff8080' : '';
+}
+
+async function rewriteText() {
+  const text = document.getElementById('inputText').value.trim();
+  const errorBox = document.getElementById('errorBox');
+  const btn = document.getElementById('rewriteBtn');
+  const resultArea = document.getElementById('resultArea');
+
+  errorBox.classList.remove('show');
+
+  if (!text) {
+    errorBox.textContent = '⚠️ Please enter some text first.';
+    errorBox.classList.add('show');
+    return;
+  }
+
+  if (text.length > 5000) {
+    errorBox.textContent = '⚠️ Text is too long. Please keep it under 5000 characters.';
+    errorBox.classList.add('show');
+    return;
+  }
+
+  btn.innerHTML = '<span class="spinner"></span> Rewriting...';
+  btn.disabled = true;
+  resultArea.innerHTML = '<span class="result-placeholder">AI is working on your text...</span>';
+
+  try {
+    const response = await fetch('/api/rewrite', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text, mode: currentMode })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) throw new Error(data.error || 'Something went wrong');
+
+    resultArea.textContent = data.result;
+
+  } catch (err) {
+    resultArea.innerHTML = '<span class="result-placeholder">Your rewritten text will appear here...</span>';
+    errorBox.textContent = '⚠️ ' + (err.message || 'Error connecting to AI. Please try again.');
+    errorBox.classList.add('show');
+  }
+
+  btn.innerHTML = '✨ Rewrite Text';
+  btn.disabled = false;
+}
+
+function copyResult() {
+  const text = document.getElementById('resultArea').textContent;
+  if (!text || text === 'Your rewritten text will appear here...') return;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('.icon-btn');
+    btn.textContent = '✓';
+    setTimeout(() => btn.textContent = '📋', 1500);
+  });
+}
+
+function clearAll() {
+  document.getElementById('inputText').value = '';
+  document.getElementById('resultArea').innerHTML = '<span class="result-placeholder">Your rewritten text will appear here...</span>';
+  document.getElementById('errorBox').classList.remove('show');
+  document.getElementById('charCount').textContent = '0';
+}
+</script>
+</body>
+</html>
