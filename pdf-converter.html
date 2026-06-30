@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PDF Converter – Free Online Tool | ToolNest</title>
+  <meta name="description" content="Convert images (JPG, PNG, WebP) to PDF instantly for free. No signup, no watermarks, works 100% in your browser."/>
+  <link rel="canonical" href="https://toolnest-steel.vercel.app/tools/pdf-converter"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+  <script src="https://pl30116577.effectivecpmnetwork.com/76/b5/bb/76b5bbd94501d12ae8d6648b945fb7eb.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg: #0a0a0f; --surface: #13131a; --surface2: #1c1c28; --border: #2a2a3a; --accent: #6c63ff; --accent2: #a78bfa; --green: #22d3a5; --text: #f0f0f8; --muted: #8888aa; --radius: 14px; --shadow: 0 4px 32px rgba(108,99,255,0.10); }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; }
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(10,10,15,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 24px; display: flex; align-items: center; gap: 12px; height: 60px; }
+    .logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.3rem; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
+    .nav-sep { color: var(--border); }
+    .nav-current { color: var(--muted); font-size: 0.85rem; }
+    .back-btn { margin-left: auto; color: var(--muted); font-size: 0.82rem; text-decoration: none; border: 1px solid var(--border); padding: 5px 12px; border-radius: 8px; transition: all 0.2s; }
+    .back-btn:hover { border-color: var(--accent); color: var(--accent2); }
+    main { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+    .tool-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: #ff8080; font-size: 0.75rem; font-weight: 600; padding: 4px 12px; border-radius: 99px; margin-bottom: 12px; letter-spacing: 0.04em; }
+    h1 { font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+    .tool-desc { color: var(--muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 32px; }
+    .dropzone { border: 2px dashed var(--border); border-radius: var(--radius); padding: 48px 24px; text-align: center; cursor: pointer; transition: all 0.22s; position: relative; background: var(--surface); }
+    .dropzone:hover, .dropzone.drag { border-color: var(--accent); background: rgba(108,99,255,0.05); }
+    .dropzone input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+    .dropzone-icon { font-size: 2.8rem; margin-bottom: 14px; }
+    .dropzone p { color: var(--muted); font-size: 0.9rem; }
+    .dropzone strong { color: var(--text); }
+    .file-info { display: none; align-items: center; gap: 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 12px 16px; margin-top: 16px; }
+    .file-info.show { display: flex; }
+    .file-info-icon { font-size: 1.5rem; }
+    .file-info-name { font-weight: 600; font-size: 0.88rem; }
+    .file-info-size { color: var(--muted); font-size: 0.78rem; }
+    .form-group { margin: 20px 0; }
+    .form-label { font-size: 0.82rem; font-weight: 600; color: var(--muted); margin-bottom: 8px; display: block; letter-spacing: 0.04em; text-transform: uppercase; }
+    .form-select { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; color: var(--text); font-family: inherit; font-size: 0.9rem; outline: none; transition: border-color 0.2s; }
+    .form-select:focus { border-color: var(--accent); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; border-radius: 10px; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.2s; border: none; text-decoration: none; width: 100%; }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), #8b5cf6); color: white; box-shadow: 0 4px 16px rgba(108,99,255,0.3); }
+    .btn-primary:hover:not(:disabled) { transform: translateY(-1px); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-success { background: linear-gradient(135deg, var(--green), #10b981); color: #0a0a0f; font-weight: 700; }
+    .spinner { width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; display: inline-block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .result-box { display: none; background: var(--surface2); border: 1px solid rgba(34,211,165,0.3); border-radius: var(--radius); padding: 24px; margin-top: 20px; text-align: center; }
+    .result-box.show { display: block; }
+    .result-icon { font-size: 2rem; margin-bottom: 8px; }
+    .result-text { color: var(--green); font-weight: 600; margin-bottom: 4px; }
+    .result-sub { color: var(--muted); font-size: 0.82rem; margin-bottom: 16px; }
+    .ad-slot { background: var(--surface); border: 1px dashed var(--border); border-radius: var(--radius); padding: 12px; text-align: center; color: var(--muted); font-size: 0.75rem; min-height: 90px; display: flex; align-items: center; justify-content: center; margin: 32px 0; }
+    footer { text-align: center; padding: 32px 24px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.82rem; }
+    footer a { color: var(--accent2); text-decoration: none; }
+  </style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="/">🛠 ToolNest</a>
+  <span class="nav-sep">/</span>
+  <span class="nav-current">PDF Converter</span>
+  <a class="back-btn" href="/">← All Tools</a>
+</nav>
+<main>
+  <div class="tool-badge">🔴 HOT</div>
+  <h1>📄 PDF Converter</h1>
+  <p class="tool-desc">Convert images (JPG, PNG, WebP) to PDF instantly. Multiple images supported — all processed in your browser.</p>
+
+  <div class="dropzone" id="dropzone">
+    <input type="file" id="fileInput" accept="image/*" multiple/>
+    <div class="dropzone-icon">🖼️</div>
+    <p><strong>Drop images here</strong> or click to upload</p>
+    <p style="margin-top:6px;font-size:0.78rem;color:var(--muted);">JPG, PNG, WebP · Multiple files supported</p>
+  </div>
+
+  <div class="file-info" id="fileInfo">
+    <span class="file-info-icon">🖼️</span>
+    <div>
+      <div class="file-info-name" id="fileName">-</div>
+      <div class="file-info-size" id="fileSize">-</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Page Size</label>
+    <select class="form-select" id="pageSize">
+      <option value="a4">A4 (Standard)</option>
+      <option value="letter">Letter (US)</option>
+      <option value="fit">Fit to Image</option>
+    </select>
+  </div>
+
+  <button class="btn btn-primary" id="convertBtn" onclick="convertToPDF()" disabled>Convert to PDF</button>
+
+  <div class="result-box" id="resultBox">
+    <div class="result-icon">✅</div>
+    <div class="result-text">PDF Ready!</div>
+    <div class="result-sub" id="resultSub">Your file has been converted.</div>
+    <button class="btn btn-success" id="downloadBtn" style="margin-top:4px;">⬇ Download PDF</button>
+  </div>
+
+  <div class="ad-slot">Advertisement</div>
+</main>
+<footer>
+  <p>© 2026 <strong style="color:var(--text)">ToolNest</strong> · <a href="/">All Tools</a> · <a href="#">Privacy Policy</a></p>
+</footer>
+<script>
+let files = [];
+const dropzone = document.getElementById('dropzone');
+const fileInput = document.getElementById('fileInput');
+const convertBtn = document.getElementById('convertBtn');
+
+dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('drag'); });
+dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag'));
+dropzone.addEventListener('drop', e => { e.preventDefault(); dropzone.classList.remove('drag'); loadFiles(Array.from(e.dataTransfer.files)); });
+fileInput.addEventListener('change', () => loadFiles(Array.from(fileInput.files)));
+
+function loadFiles(f) {
+  files = f.filter(x => x.type.startsWith('image/'));
+  if (!files.length) return;
+  document.getElementById('fileName').textContent = files.length === 1 ? files[0].name : `${files.length} images selected`;
+  document.getElementById('fileSize').textContent = formatSize(files.reduce((a,f)=>a+f.size,0));
+  document.getElementById('fileInfo').classList.add('show');
+  convertBtn.disabled = false;
+  document.getElementById('resultBox').classList.remove('show');
+}
+
+async function convertToPDF() {
+  if (!files.length) return;
+  convertBtn.innerHTML = '<span class="spinner"></span> Converting...';
+  convertBtn.disabled = true;
+  try {
+    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');
+    const { jsPDF } = window.jspdf;
+    const pageSize = document.getElementById('pageSize').value;
+    let pdf = null, isFirst = true;
+    for (const file of files) {
+      // Convert to a flattened JPEG on white background so PNG transparency
+      // never turns black, and so jsPDF always receives a clean JPEG buffer.
+      const flattenedData = await flattenToJPEG(file);
+      const img = await loadImage(flattenedData);
+      let pw, ph;
+      if (pageSize === 'a4') { pw = 210; ph = 297; }
+      else if (pageSize === 'letter') { pw = 216; ph = 279; }
+      else { pw = img.width * 0.264583; ph = img.height * 0.264583; }
+      if (isFirst) { pdf = new jsPDF({ orientation: pw > ph ? 'l' : 'p', unit: 'mm', format: [pw, ph] }); isFirst = false; }
+      else { pdf.addPage([pw, ph], pw > ph ? 'l' : 'p'); }
+      // Correct aspect-ratio-preserving fit (no stretching/squishing)
+      const imgRatio = img.width / img.height;
+      const pageRatio = pw / ph;
+      let iw, ih;
+      if (imgRatio > pageRatio) { iw = pw; ih = pw / imgRatio; }
+      else { ih = ph; iw = ph * imgRatio; }
+      pdf.addImage(flattenedData, 'JPEG', (pw-iw)/2, (ph-ih)/2, iw, ih);
+    }
+    const blob = pdf.output('blob');
+    const url = URL.createObjectURL(blob);
+    document.getElementById('resultSub').textContent = `${files.length} image(s) converted · ${formatSize(blob.size)}`;
+    document.getElementById('downloadBtn').onclick = () => { const a=document.createElement('a');a.href=url;a.download='toolnest-converted.pdf';a.click(); };
+    document.getElementById('resultBox').classList.add('show');
+  } catch(err) { alert('Error: ' + err.message); }
+  convertBtn.innerHTML = 'Convert to PDF';
+  convertBtn.disabled = false;
+}
+
+function formatSize(b) { if(b<1024)return b+' B'; if(b<1048576)return(b/1024).toFixed(1)+' KB'; return(b/1048576).toFixed(2)+' MB'; }
+function fileToDataURL(file) { return new Promise(res => { const r=new FileReader();r.onload=e=>res(e.target.result);r.readAsDataURL(file); }); }
+function loadImage(src) { return new Promise(res => { const img=new Image();img.onload=()=>res(img);img.src=src; }); }
+function flattenToJPEG(file) {
+  return new Promise(async (resolve) => {
+    const dataUrl = await fileToDataURL(file);
+    const img = await loadImage(dataUrl);
+    const canvas = document.createElement('canvas');
+    canvas.width = img.width;
+    canvas.height = img.height;
+    const ctx = canvas.getContext('2d');
+    // White background prevents transparent PNGs turning black in the PDF
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0);
+    resolve(canvas.toDataURL('image/jpeg', 0.95));
+  });
+}
+function loadScript(src) { return new Promise((res,rej) => { if(document.querySelector(`script[src="${src}"]`)){res();return;} const s=document.createElement('script');s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s); }); }
+</script>
+</body>
+</html>
