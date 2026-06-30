@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ToolNest – Free Online PDF & Image Tools</title>
+  <meta name="description" content="Free online tools: PDF Converter, Background Remover, Image Converter, PDF Compress, PDF Merge & Split. No signup, no watermark, 100% free."/>
+  <meta name="keywords" content="pdf converter, background remover, image converter, pdf compress, pdf merge, free online tools"/>
+  <meta name="google-site-verification" content="NaUchV6wybXT96GKAHDZ4EXehQ0G9kATdjrIk03gTd4" />
+  <link rel="canonical" href="https://toolnest-steel.vercel.app/"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+  <script src="https://pl30116577.effectivecpmnetwork.com/76/b5/bb/76b5bbd94501d12ae8d6648b945fb7eb.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0f; --surface: #13131a; --surface2: #1c1c28; --border: #2a2a3a;
+      --accent: #6c63ff; --accent2: #a78bfa; --green: #22d3a5;
+      --text: #f0f0f8; --muted: #8888aa; --radius: 14px;
+      --shadow: 0 4px 32px rgba(108,99,255,0.10);
+    }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; overflow-x: hidden; }
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(10,10,15,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.3rem; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
+    .nav-tagline { color: var(--muted); font-size: 0.8rem; }
+    .hero { text-align: center; padding: 72px 24px 48px; background: radial-gradient(ellipse 80% 400px at 50% 0%, rgba(108,99,255,0.12) 0%, transparent 70%); }
+    .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(108,99,255,0.12); border: 1px solid rgba(108,99,255,0.3); color: var(--accent2); font-size: 0.78rem; font-weight: 600; padding: 5px 14px; border-radius: 99px; margin-bottom: 20px; letter-spacing: 0.04em; }
+    .hero h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 700; line-height: 1.15; margin-bottom: 16px; }
+    .hero h1 span { background: linear-gradient(135deg, var(--accent), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { color: var(--muted); font-size: 1.05rem; max-width: 520px; margin: 0 auto 32px; }
+    .hero-stats { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; margin-bottom: 8px; }
+    .stat { text-align: center; }
+    .stat-num { font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--accent2); }
+    .stat-label { font-size: 0.75rem; color: var(--muted); }
+    .ad-banner { max-width: 728px; margin: 0 auto 8px; background: var(--surface); border: 1px dashed var(--border); border-radius: var(--radius); padding: 12px; text-align: center; color: var(--muted); font-size: 0.75rem; min-height: 90px; display: flex; align-items: center; justify-content: center; }
+    .tools-section { max-width: 1100px; margin: 0 auto; padding: 48px 24px; }
+    .section-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
+    .section-sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 32px; }
+    .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+    .tool-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 20px; cursor: pointer; transition: all 0.22s ease; text-align: center; position: relative; overflow: hidden; text-decoration: none; display: block; color: var(--text); }
+    .tool-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(108,99,255,0.05), transparent); opacity: 0; transition: opacity 0.22s; }
+    .tool-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: var(--shadow); }
+    .tool-card:hover::before { opacity: 1; }
+    .tool-card.hot::after { content: 'HOT'; position: absolute; top: 10px; right: 10px; background: linear-gradient(135deg, #ff6b6b, #ff4757); color: white; font-size: 0.6rem; font-weight: 700; padding: 2px 7px; border-radius: 99px; letter-spacing: 0.05em; }
+    .tool-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin: 0 auto 14px; }
+    .tool-name { font-weight: 600; font-size: 0.92rem; margin-bottom: 5px; }
+    .tool-desc { color: var(--muted); font-size: 0.78rem; line-height: 1.4; }
+    .how-section { background: var(--surface); border-top: 1px solid var(--border); padding: 64px 24px; }
+    .how-inner { max-width: 900px; margin: 0 auto; }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-top: 32px; }
+    .step { text-align: center; }
+    .step-num { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), #8b5cf6); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; margin: 0 auto 14px; }
+    .step h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
+    .step p { color: var(--muted); font-size: 0.82rem; line-height: 1.5; }
+    footer { text-align: center; padding: 32px 24px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.82rem; }
+    footer a { color: var(--accent2); text-decoration: none; }
+    .mt-12 { margin-top: 12px; }
+    @media(max-width:600px) { .hero { padding: 48px 16px 32px; } .hero-stats { gap: 20px; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="/">🛠 ToolNest</a>
+  <span class="nav-tagline">Free Online Tools</span>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">✨ 100% Free · No Signup · No Watermark</div>
+  <h1>Your <span>Favorite Tools,</span><br/>All In One Place</h1>
+  <p>PDF, image, and file tools that just work. No downloads, no accounts, no limits.</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">9+</div><div class="stat-label">Free Tools</div></div>
+    <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Browser Based</div></div>
+    <div class="stat"><div class="stat-num">0</div><div class="stat-label">Signup Required</div></div>
+  </div>
+</section>
+
+<div style="max-width:728px;margin:0 auto 24px;padding:0 24px;">
+  <div class="ad-banner"><span>Advertisement</span></div>
+</div>
+
+<section class="tools-section">
+  <h2 class="section-title">All Tools</h2>
+  <p class="section-sub">Click any tool to get started — everything runs in your browser instantly.</p>
+  <div class="tools-grid">
+    <a class="tool-card hot" href="/tools/pdf-converter">
+      <div class="tool-icon" style="background:rgba(239,68,68,0.12);">📄</div>
+      <div class="tool-name">PDF Converter</div>
+      <div class="tool-desc">Convert Word, images & more to PDF instantly</div>
+    </a>
+    <a class="tool-card hot" href="/tools/background-remover">
+      <div class="tool-icon" style="background:rgba(108,99,255,0.12);">🖼️</div>
+      <div class="tool-name">Background Remover</div>
+      <div class="tool-desc">Remove image background with AI precision</div>
+    </a>
+    <a class="tool-card" href="/tools/image-converter">
+      <div class="tool-icon" style="background:rgba(34,211,165,0.12);">🔄</div>
+      <div class="tool-name">Image Converter</div>
+      <div class="tool-desc">Convert between JPG, PNG, WebP formats</div>
+    </a>
+    <a class="tool-card" href="/tools/pdf-compress">
+      <div class="tool-icon" style="background:rgba(251,191,36,0.12);">📦</div>
+      <div class="tool-name">PDF Compress</div>
+      <div class="tool-desc">Reduce PDF file size without quality loss</div>
+    </a>
+    <a class="tool-card" href="/tools/pdf-merge">
+      <div class="tool-icon" style="background:rgba(16,185,129,0.12);">✂️</div>
+      <div class="tool-name">PDF Merge & Split</div>
+      <div class="tool-desc">Combine multiple PDFs or split into pages</div>
+    </a>
+    <a class="tool-card" href="/tools/image-resizer">
+      <div class="tool-icon" style="background:rgba(167,139,250,0.12);">📐</div>
+      <div class="tool-name">Image Resizer</div>
+      <div class="tool-desc">Resize images to any dimension instantly</div>
+    </a>
+    <a class="tool-card hot" href="/tools/qr-code-generator">
+      <div class="tool-icon" style="background:rgba(108,99,255,0.12);">🔲</div>
+      <div class="tool-name">QR Code Generator</div>
+      <div class="tool-desc">Create QR codes for links, text, WiFi & more</div>
+    </a>
+    <a class="tool-card" href="/tools/password-generator">
+      <div class="tool-icon" style="background:rgba(34,211,165,0.12);">🔐</div>
+      <div class="tool-name">Password Generator</div>
+      <div class="tool-desc">Generate strong, secure random passwords</div>
+    </a>
+    <a class="tool-card" href="/tools/word-counter">
+      <div class="tool-icon" style="background:rgba(251,191,36,0.12);">📝</div>
+      <div class="tool-name">Word Counter</div>
+      <div class="tool-desc">Count words, characters & reading time</div>
+    </a>
+  </div>
+</section>
+
+<section class="how-section">
+  <div class="how-inner">
+    <h2 class="section-title" style="text-align:center;">How It Works</h2>
+    <p class="section-sub" style="text-align:center;">Three simple steps — done in seconds</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><h3>Upload Your File</h3><p>Drag & drop or click to upload. Works with any device, any browser.</p></div>
+      <div class="step"><div class="step-num">2</div><h3>Choose Options</h3><p>Pick your settings — output format, quality, or compression level.</p></div>
+      <div class="step"><div class="step-num">3</div><h3>Download Result</h3><p>Your file is ready instantly. Download it — no email required.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 <strong style="color:var(--text)">ToolNest</strong> · Free Online Tools · <a href="#">Privacy Policy</a> · <a href="#">Contact</a></p>
+  <p class="mt-12">All files are processed in your browser. We never store your files.</p>
+</footer>
+
+</body>
+</html>
