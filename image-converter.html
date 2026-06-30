@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Image Converter – Free Online Tool | ToolNest</title>
+  <meta name="description" content="Convert images between JPG, PNG, and WebP formats instantly for free. No signup, no watermarks, works 100% in your browser."/>
+  <link rel="canonical" href="https://toolnest-steel.vercel.app/tools/image-converter"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+  <script src="https://pl30116577.effectivecpmnetwork.com/76/b5/bb/76b5bbd94501d12ae8d6648b945fb7eb.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg: #0a0a0f; --surface: #13131a; --surface2: #1c1c28; --border: #2a2a3a; --accent: #6c63ff; --accent2: #a78bfa; --green: #22d3a5; --text: #f0f0f8; --muted: #8888aa; --radius: 14px; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; }
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(10,10,15,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 24px; display: flex; align-items: center; gap: 12px; height: 60px; }
+    .logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.3rem; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
+    .nav-sep { color: var(--border); }
+    .nav-current { color: var(--muted); font-size: 0.85rem; }
+    .back-btn { margin-left: auto; color: var(--muted); font-size: 0.82rem; text-decoration: none; border: 1px solid var(--border); padding: 5px 12px; border-radius: 8px; transition: all 0.2s; }
+    .back-btn:hover { border-color: var(--accent); color: var(--accent2); }
+    main { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+    .tool-badge { display: inline-flex; background: rgba(34,211,165,0.1); border: 1px solid rgba(34,211,165,0.3); color: var(--green); font-size: 0.75rem; font-weight: 600; padding: 4px 12px; border-radius: 99px; margin-bottom: 12px; letter-spacing: 0.04em; }
+    h1 { font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+    .tool-desc { color: var(--muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 32px; }
+    .dropzone { border: 2px dashed var(--border); border-radius: var(--radius); padding: 48px 24px; text-align: center; cursor: pointer; transition: all 0.22s; position: relative; background: var(--surface); }
+    .dropzone:hover, .dropzone.drag { border-color: var(--accent); background: rgba(108,99,255,0.05); }
+    .dropzone input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+    .dropzone-icon { font-size: 2.8rem; margin-bottom: 14px; }
+    .dropzone p { color: var(--muted); font-size: 0.9rem; }
+    .dropzone strong { color: var(--text); }
+    .img-preview { max-width: 100%; border-radius: 10px; margin: 16px 0; border: 1px solid var(--border); display: none; }
+    .img-preview.show { display: block; }
+    .file-info { display: none; align-items: center; gap: 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 12px 16px; margin-top: 16px; }
+    .file-info.show { display: flex; }
+    .form-group { margin: 20px 0; }
+    .form-label { font-size: 0.82rem; font-weight: 600; color: var(--muted); margin-bottom: 8px; display: block; letter-spacing: 0.04em; text-transform: uppercase; }
+    .options-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .option-chip { padding: 8px 18px; border-radius: 99px; font-size: 0.82rem; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: var(--surface2); color: var(--muted); transition: all 0.2s; }
+    .option-chip.active, .option-chip:hover { border-color: var(--accent); color: var(--accent2); background: rgba(108,99,255,0.1); }
+    .form-range { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; color: var(--text); font-family: inherit; font-size: 0.9rem; outline: none; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; border-radius: 10px; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.2s; border: none; width: 100%; }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), #8b5cf6); color: white; }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-success { background: linear-gradient(135deg, var(--green), #10b981); color: #0a0a0f; font-weight: 700; }
+    .result-box { display: none; background: var(--surface2); border: 1px solid rgba(34,211,165,0.3); border-radius: var(--radius); padding: 24px; margin-top: 20px; text-align: center; }
+    .result-box.show { display: block; }
+    .result-text { color: var(--green); font-weight: 600; font-size: 1.1rem; margin-bottom: 4px; }
+    .result-sub { color: var(--muted); font-size: 0.82rem; margin-bottom: 16px; }
+    .ad-slot { background: var(--surface); border: 1px dashed var(--border); border-radius: var(--radius); padding: 12px; text-align: center; color: var(--muted); font-size: 0.75rem; min-height: 90px; display: flex; align-items: center; justify-content: center; margin: 32px 0; }
+    footer { text-align: center; padding: 32px 24px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.82rem; }
+    footer a { color: var(--accent2); text-decoration: none; }
+  </style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="/">🛠 ToolNest</a>
+  <span class="nav-sep">/</span>
+  <span class="nav-current">Image Converter</span>
+  <a class="back-btn" href="/">← All Tools</a>
+</nav>
+<main>
+  <div class="tool-badge">🔄 Free Tool</div>
+  <h1>🔄 Image Converter</h1>
+  <p class="tool-desc">Convert images between JPG, PNG, and WebP formats in seconds. Adjust quality and download instantly.</p>
+
+  <div class="dropzone" id="dropzone">
+    <input type="file" id="fileInput" accept="image/*"/>
+    <div class="dropzone-icon">🔄</div>
+    <p><strong>Drop image here</strong> or click to upload</p>
+    <p style="margin-top:6px;font-size:0.78rem;color:var(--muted);">JPG, PNG, WebP supported</p>
+  </div>
+
+  <img id="imgPreview" class="img-preview" alt="Preview"/>
+
+  <div class="file-info" id="fileInfo">
+    <span style="font-size:1.5rem;">🖼️</span>
+    <div>
+      <div style="font-weight:600;font-size:0.88rem;" id="fileName">-</div>
+      <div style="color:var(--muted);font-size:0.78rem;" id="fileSize">-</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Convert To</label>
+    <div class="options-row">
+      <div class="option-chip active" onclick="setFormat(this,'image/jpeg')">JPG</div>
+      <div class="option-chip" onclick="setFormat(this,'image/png')">PNG</div>
+      <div class="option-chip" onclick="setFormat(this,'image/webp')">WebP</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Quality: <span id="qualVal">90</span>%</label>
+    <input type="range" class="form-range" id="quality" min="10" max="100" value="90" oninput="document.getElementById('qualVal').textContent=this.value"/>
+  </div>
+
+  <button class="btn btn-primary" id="convertBtn" onclick="convertImage()" disabled>Convert Image</button>
+
+  <div class="result-box" id="resultBox">
+    <div style="font-size:2rem;margin-bottom:8px;">✅</div>
+    <div class="result-text">Image Converted!</div>
+    <div class="result-sub" id="resultSub">Your image is ready.</div>
+    <button class="btn btn-success" id="downloadBtn">⬇ Download</button>
+  </div>
+
+  <div class="ad-slot">Advertisement</div>
+</main>
+<footer>
+  <p>© 2026 <strong style="color:var(--text)">ToolNest</strong> · <a href="/">All Tools</a> · <a href="#">Privacy Policy</a></p>
+</footer>
+<script>
+let imgFile = null, selectedFormat = 'image/jpeg';
+const dropzone = document.getElementById('dropzone');
+const fileInput = document.getElementById('fileInput');
+
+dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('drag'); });
+dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag'));
+dropzone.addEventListener('drop', e => { e.preventDefault(); dropzone.classList.remove('drag'); if(e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]); });
+fileInput.addEventListener('change', () => { if(fileInput.files[0]) loadFile(fileInput.files[0]); });
+
+function loadFile(f) {
+  imgFile = f;
+  const reader = new FileReader();
+  reader.onload = ev => { const p=document.getElementById('imgPreview');p.src=ev.target.result;p.classList.add('show'); };
+  reader.readAsDataURL(f);
+  document.getElementById('fileName').textContent = f.name;
+  document.getElementById('fileSize').textContent = formatSize(f.size);
+  document.getElementById('fileInfo').classList.add('show');
+  document.getElementById('convertBtn').disabled = false;
+  document.getElementById('resultBox').classList.remove('show');
+}
+
+function setFormat(el, fmt) {
+  selectedFormat = fmt;
+  document.querySelectorAll('.option-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function convertImage() {
+  if (!imgFile) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = img.width; canvas.height = img.height;
+      const ctx = canvas.getContext('2d');
+      if (selectedFormat === 'image/jpeg') { ctx.fillStyle = '#fff'; ctx.fillRect(0,0,canvas.width,canvas.height); }
+      ctx.drawImage(img, 0, 0);
+      const quality = document.getElementById('quality').value / 100;
+      const ext = selectedFormat === 'image/jpeg' ? 'jpg' : selectedFormat === 'image/png' ? 'png' : 'webp';
+      canvas.toBlob(blob => {
+        const url = URL.createObjectURL(blob);
+        document.getElementById('resultSub').textContent = `Converted to ${ext.toUpperCase()} · ${img.width}×${img.height}px · ${formatSize(blob.size)}`;
+        document.getElementById('downloadBtn').onclick = () => { const a=document.createElement('a');a.href=url;a.download=`toolnest-converted.${ext}`;a.click(); };
+        document.getElementById('resultBox').classList.add('show');
+      }, selectedFormat, quality);
+    };
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(imgFile);
+}
+
+function formatSize(b) { if(b<1024)return b+' B'; if(b<1048576)return(b/1024).toFixed(1)+' KB'; return(b/1048576).toFixed(2)+' MB'; }
+</script>
+</body>
+</html>
