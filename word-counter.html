@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Word Counter – Free Online Tool | ToolNest</title>
+  <meta name="description" content="Count words, characters, sentences, and reading time instantly for free. No signup, 100% browser-based, nothing stored."/>
+  <link rel="canonical" href="https://toolnest-steel.vercel.app/tools/word-counter"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+  <script src="https://pl30116577.effectivecpmnetwork.com/76/b5/bb/76b5bbd94501d12ae8d6648b945fb7eb.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg: #0a0a0f; --surface: #13131a; --surface2: #1c1c28; --border: #2a2a3a; --accent: #6c63ff; --accent2: #a78bfa; --green: #22d3a5; --text: #f0f0f8; --muted: #8888aa; --radius: 14px; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; }
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(10,10,15,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 24px; display: flex; align-items: center; gap: 12px; height: 60px; }
+    .logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.3rem; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
+    .nav-sep { color: var(--border); }
+    .nav-current { color: var(--muted); font-size: 0.85rem; }
+    .back-btn { margin-left: auto; color: var(--muted); font-size: 0.82rem; text-decoration: none; border: 1px solid var(--border); padding: 5px 12px; border-radius: 8px; transition: all 0.2s; }
+    .back-btn:hover { border-color: var(--accent); color: var(--accent2); }
+    main { max-width: 760px; margin: 0 auto; padding: 48px 24px 80px; }
+    .tool-badge { display: inline-flex; background: rgba(108,99,255,0.12); border: 1px solid rgba(108,99,255,0.3); color: var(--accent2); font-size: 0.75rem; font-weight: 600; padding: 4px 12px; border-radius: 99px; margin-bottom: 12px; letter-spacing: 0.04em; }
+    h1 { font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+    .tool-desc { color: var(--muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 28px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; margin-bottom: 20px; }
+    .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 12px; text-align: center; }
+    .stat-num { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--accent2); }
+    .stat-label { font-size: 0.72rem; color: var(--muted); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.03em; }
+    .editor-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+    .editor-toolbar { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; border-bottom: 1px solid var(--border); }
+    .editor-toolbar span { font-size: 0.78rem; color: var(--muted); }
+    .clear-btn { font-size: 0.78rem; color: var(--muted); background: none; border: none; cursor: pointer; transition: color 0.2s; }
+    .clear-btn:hover { color: #ff8080; }
+    textarea { width: 100%; min-height: 300px; background: transparent; border: none; outline: none; resize: vertical; padding: 18px; color: var(--text); font-family: 'Inter', sans-serif; font-size: 0.95rem; line-height: 1.7; }
+    .extra-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-top: 20px; }
+    .extra-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+    .extra-label { font-size: 0.75rem; color: var(--muted); margin-bottom: 4px; }
+    .extra-val { font-size: 1rem; font-weight: 600; }
+    .ad-slot { background: var(--surface); border: 1px dashed var(--border); border-radius: var(--radius); padding: 12px; text-align: center; color: var(--muted); font-size: 0.75rem; min-height: 90px; display: flex; align-items: center; justify-content: center; margin: 32px 0; }
+    footer { text-align: center; padding: 32px 24px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.82rem; }
+    footer a { color: var(--accent2); text-decoration: none; }
+  </style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="/">🛠 ToolNest</a>
+  <span class="nav-sep">/</span>
+  <span class="nav-current">Word Counter</span>
+  <a class="back-btn" href="/">← All Tools</a>
+</nav>
+<main>
+  <div class="tool-badge">📝 Free Tool</div>
+  <h1>📝 Word Counter</h1>
+  <p class="tool-desc">Count words, characters, sentences, and estimate reading time as you type. Perfect for essays, captions, and content writing.</p>
+
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-num" id="wordCount">0</div><div class="stat-label">Words</div></div>
+    <div class="stat-card"><div class="stat-num" id="charCount">0</div><div class="stat-label">Characters</div></div>
+    <div class="stat-card"><div class="stat-num" id="charNoSpaceCount">0</div><div class="stat-label">No Spaces</div></div>
+    <div class="stat-card"><div class="stat-num" id="sentenceCount">0</div><div class="stat-label">Sentences</div></div>
+    <div class="stat-card"><div class="stat-num" id="paraCount">0</div><div class="stat-label">Paragraphs</div></div>
+  </div>
+
+  <div class="editor-wrap">
+    <div class="editor-toolbar">
+      <span>Type or paste your text below</span>
+      <button class="clear-btn" onclick="clearText()">Clear all</button>
+    </div>
+    <textarea id="textInput" placeholder="Start typing here..." oninput="updateStats()"></textarea>
+  </div>
+
+  <div class="extra-stats">
+    <div class="extra-card">
+      <div class="extra-label">Reading Time</div>
+      <div class="extra-val" id="readTime">0 sec</div>
+    </div>
+    <div class="extra-card">
+      <div class="extra-label">Speaking Time</div>
+      <div class="extra-val" id="speakTime">0 sec</div>
+    </div>
+    <div class="extra-card">
+      <div class="extra-label">Avg Word Length</div>
+      <div class="extra-val" id="avgWordLen">0</div>
+    </div>
+  </div>
+
+  <div class="ad-slot">Advertisement</div>
+</main>
+<footer>
+  <p>© 2026 <strong style="color:var(--text)">ToolNest</strong> · <a href="/">All Tools</a> · <a href="#">Privacy Policy</a></p>
+</footer>
+<script>
+function updateStats() {
+  const text = document.getElementById('textInput').value;
+
+  const trimmed = text.trim();
+  const words = trimmed === '' ? [] : trimmed.split(/\s+/);
+  const wordCount = words.length;
+
+  const charCount = text.length;
+  const charNoSpace = text.replace(/\s/g, '').length;
+
+  const sentences = trimmed === '' ? [] : trimmed.split(/[.!?]+/).filter(s => s.trim().length > 0);
+  const sentenceCount = sentences.length;
+
+  const paragraphs = trimmed === '' ? [] : trimmed.split(/\n+/).filter(p => p.trim().length > 0);
+  const paraCount = paragraphs.length || (trimmed ? 1 : 0);
+
+  document.getElementById('wordCount').textContent = wordCount.toLocaleString();
+  document.getElementById('charCount').textContent = charCount.toLocaleString();
+  document.getElementById('charNoSpaceCount').textContent = charNoSpace.toLocaleString();
+  document.getElementById('sentenceCount').textContent = sentenceCount.toLocaleString();
+  document.getElementById('paraCount').textContent = paraCount.toLocaleString();
+
+  // Reading time: avg 225 wpm
+  const readSec = Math.round((wordCount / 225) * 60);
+  document.getElementById('readTime').textContent = formatTime(readSec);
+
+  // Speaking time: avg 150 wpm
+  const speakSec = Math.round((wordCount / 150) * 60);
+  document.getElementById('speakTime').textContent = formatTime(speakSec);
+
+  // Avg word length
+  const avgLen = wordCount > 0 ? (charNoSpace / wordCount).toFixed(1) : '0';
+  document.getElementById('avgWordLen').textContent = avgLen + ' chars';
+}
+
+function formatTime(sec) {
+  if (sec < 60) return sec + ' sec';
+  const min = Math.floor(sec / 60);
+  const rem = sec % 60;
+  return rem > 0 ? `${min} min ${rem} sec` : `${min} min`;
+}
+
+function clearText() {
+  document.getElementById('textInput').value = '';
+  updateStats();
+}
+
+updateStats();
+</script>
+</body>
+</html>
