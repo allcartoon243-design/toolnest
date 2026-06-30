@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Background Remover – Free AI Tool | ToolNest</title>
+  <meta name="description" content="Remove image backgrounds instantly for free using AI. No signup, no watermarks, works 100% in your browser. PNG, JPG, WebP supported."/>
+  <link rel="canonical" href="https://toolnest-steel.vercel.app/tools/background-remover"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+  <script src="https://pl30116577.effectivecpmnetwork.com/76/b5/bb/76b5bbd94501d12ae8d6648b945fb7eb.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0f; --surface: #13131a; --surface2: #1c1c28; --border: #2a2a3a;
+      --accent: #6c63ff; --accent2: #a78bfa; --green: #22d3a5;
+      --text: #f0f0f8; --muted: #8888aa; --radius: 14px;
+      --shadow: 0 4px 32px rgba(108,99,255,0.10);
+    }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; }
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(10,10,15,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 24px; display: flex; align-items: center; gap: 12px; height: 60px; }
+    .logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.3rem; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
+    .nav-sep { color: var(--border); }
+    .nav-current { color: var(--muted); font-size: 0.85rem; }
+    .back-btn { margin-left: auto; color: var(--muted); font-size: 0.82rem; text-decoration: none; border: 1px solid var(--border); padding: 5px 12px; border-radius: 8px; transition: all 0.2s; }
+    .back-btn:hover { border-color: var(--accent); color: var(--accent2); }
+    main { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+    .tool-header { margin-bottom: 32px; }
+    .tool-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(108,99,255,0.12); border: 1px solid rgba(108,99,255,0.3); color: var(--accent2); font-size: 0.75rem; font-weight: 600; padding: 4px 12px; border-radius: 99px; margin-bottom: 12px; letter-spacing: 0.04em; }
+    h1 { font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+    .tool-desc { color: var(--muted); font-size: 0.95rem; line-height: 1.6; }
+    .dropzone { border: 2px dashed var(--border); border-radius: var(--radius); padding: 48px 24px; text-align: center; cursor: pointer; transition: all 0.22s; position: relative; background: var(--surface); }
+    .dropzone:hover, .dropzone.drag { border-color: var(--accent); background: rgba(108,99,255,0.05); }
+    .dropzone input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+    .dropzone-icon { font-size: 2.8rem; margin-bottom: 14px; }
+    .dropzone p { color: var(--muted); font-size: 0.9rem; }
+    .dropzone strong { color: var(--text); }
+    .dropzone-sub { margin-top: 8px; font-size: 0.78rem; color: var(--muted); }
+    .status-box { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-top: 16px; text-align: center; }
+    .status-box.show { display: block; }
+    .spinner { width: 28px; height: 28px; border: 3px solid rgba(108,99,255,0.2); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.7s linear infinite; margin: 0 auto 14px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .status-text { color: var(--muted); font-size: 0.88rem; margin-bottom: 12px; }
+    .status-text strong { color: var(--text); }
+    .progress-bar { width: 100%; height: 6px; background: var(--surface2); border-radius: 99px; overflow: hidden; }
+    .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--green)); transition: width 0.3s ease; border-radius: 99px; }
+    .result-section { display: none; margin-top: 24px; }
+    .result-section.show { display: block; }
+    .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+    @media(max-width: 520px) { .result-grid { grid-template-columns: 1fr; } }
+    .result-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+    .result-card-label { padding: 10px 14px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); border-bottom: 1px solid var(--border); }
+    .result-img-wrap { padding: 16px; display: flex; align-items: center; justify-content: center; min-height: 180px; }
+    .result-img-wrap.checkerboard { background-image: repeating-conic-gradient(#1c1c28 0% 25%, #13131a 0% 50%); background-size: 16px 16px; }
+    .result-img-wrap img { max-width: 100%; max-height: 240px; object-fit: contain; border-radius: 6px; }
+    .download-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: rgba(34,211,165,0.08); border: 1px solid rgba(34,211,165,0.2); border-radius: var(--radius); padding: 16px 20px; }
+    .download-info { font-size: 0.88rem; }
+    .download-info strong { color: var(--green); }
+    .btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 7px; padding: 10px 20px; border-radius: 10px; font-weight: 600; font-size: 0.88rem; cursor: pointer; transition: all 0.2s; border: none; text-decoration: none; }
+    .btn-success { background: linear-gradient(135deg, var(--green), #10b981); color: #0a0a0f; }
+    .btn-success:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(34,211,165,0.3); }
+    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--muted); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent2); }
+    .error-box { display: none; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.25); border-radius: var(--radius); padding: 14px 18px; margin-top: 16px; color: #ff8080; font-size: 0.88rem; }
+    .error-box.show { display: block; }
+    .info-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 40px; }
+    .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
+    .info-icon { font-size: 1.3rem; margin-bottom: 8px; }
+    .info-title { font-weight: 600; font-size: 0.88rem; margin-bottom: 4px; }
+    .info-body { color: var(--muted); font-size: 0.78rem; line-height: 1.5; }
+    .ad-slot { background: var(--surface); border: 1px dashed var(--border); border-radius: var(--radius); padding: 12px; text-align: center; color: var(--muted); font-size: 0.75rem; min-height: 90px; display: flex; align-items: center; justify-content: center; margin: 32px 0; }
+    footer { text-align: center; padding: 32px 24px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.82rem; margin-top: 40px; }
+    footer a { color: var(--accent2); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="/">🛠 ToolNest</a>
+  <span class="nav-sep">/</span>
+  <span class="nav-current">Background Remover</span>
+  <a class="back-btn" href="/">← All Tools</a>
+</nav>
+
+<main>
+  <div class="tool-header">
+    <div class="tool-badge">✨ AI Powered · 100% Free</div>
+    <h1>🖼️ Background Remover</h1>
+    <p class="tool-desc">Remove image backgrounds instantly using AI. No signup, no watermarks — your images never leave your device.</p>
+  </div>
+
+  <div class="dropzone" id="dropzone">
+    <input type="file" id="fileInput" accept="image/png,image/jpeg,image/webp"/>
+    <div class="dropzone-icon">✂️</div>
+    <p><strong>Drop your image here</strong> or click to upload</p>
+    <p class="dropzone-sub">PNG, JPG, WebP · Max 10 MB</p>
+  </div>
+
+  <div class="error-box" id="errorBox"></div>
+
+  <div class="status-box" id="statusBox">
+    <div class="spinner"></div>
+    <div class="status-text" id="statusText"><strong>Loading AI model…</strong> First time only, takes a few seconds.</div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <div class="result-section" id="resultSection">
+    <div class="result-grid">
+      <div class="result-card">
+        <div class="result-card-label">Original</div>
+        <div class="result-img-wrap"><img id="originalImg" alt="Original"/></div>
+      </div>
+      <div class="result-card">
+        <div class="result-card-label">Background Removed</div>
+        <div class="result-img-wrap checkerboard"><img id="resultImg" alt="Result"/></div>
+      </div>
+    </div>
+    <div class="download-row">
+      <div class="download-info"><strong>Done!</strong> Background removed successfully.</div>
+      <div class="btn-group">
+        <button class="btn btn-outline" onclick="resetTool()">Try another</button>
+        <a class="btn btn-success" id="downloadBtn" href="#" download="toolnest-nobg.png">⬇ Download PNG</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ad-slot">Advertisement</div>
+
+  <div class="info-cards">
+    <div class="info-card">
+      <div class="info-icon">🔒</div>
+      <div class="info-title">100% Private</div>
+      <div class="info-body">Images are processed entirely in your browser. Nothing is uploaded to any server.</div>
+    </div>
+    <div class="info-card">
+      <div class="info-icon">⚡</div>
+      <div class="info-title">Fast After First Use</div>
+      <div class="info-body">AI model downloads once (~40 MB) and is cached. Next images process instantly.</div>
+    </div>
+    <div class="info-card">
+      <div class="info-icon">🎯</div>
+      <div class="info-title">Best Results</div>
+      <div class="info-body">Works great on portraits, products, logos, and objects with clear subjects.</div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>© 2026 <strong style="color:var(--text)">ToolNest</strong> · <a href="/">All Tools</a> · <a href="#">Privacy Policy</a></p>
+</footer>
+
+<script type="module">
+  import { removeBackground } from 'https://esm.sh/@imgly/background-removal@1.4.5';
+
+  const dropzone = document.getElementById('dropzone');
+  const fileInput = document.getElementById('fileInput');
+  const statusBox = document.getElementById('statusBox');
+  const statusText = document.getElementById('statusText');
+  const progressFill = document.getElementById('progressFill');
+  const resultSection = document.getElementById('resultSection');
+  const errorBox = document.getElementById('errorBox');
+  const originalImg = document.getElementById('originalImg');
+  const resultImg = document.getElementById('resultImg');
+  const downloadBtn = document.getElementById('downloadBtn');
+
+  let busy = false;
+
+  dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('drag'); });
+  dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag'));
+  dropzone.addEventListener('drop', e => { e.preventDefault(); dropzone.classList.remove('drag'); if (e.dataTransfer.files[0]) process(e.dataTransfer.files[0]); });
+  fileInput.addEventListener('change', () => { if (fileInput.files[0]) process(fileInput.files[0]); });
+
+  function resetTool() {
+    busy = false;
+    fileInput.value = '';
+    dropzone.style.display = '';
+    resultSection.classList.remove('show');
+    statusBox.classList.remove('show');
+    errorBox.classList.remove('show');
+    progressFill.style.width = '0%';
+  }
+
+  function showError(msg) {
+    errorBox.textContent = '⚠️ ' + msg;
+    errorBox.classList.add('show');
+    statusBox.classList.remove('show');
+    dropzone.style.display = '';
+    busy = false;
+  }
+
+  async function process(file) {
+    if (busy) return;
+    if (!file.type.startsWith('image/')) return showError('Please upload a valid image file (PNG, JPG, or WebP).');
+    if (file.size > 10 * 1024 * 1024) return showError('Image is too large. Please use an image under 10 MB.');
+
+    busy = true;
+    errorBox.classList.remove('show');
+    resultSection.classList.remove('show');
+    dropzone.style.display = 'none';
+    statusBox.classList.add('show');
+    progressFill.style.width = '5%';
+    statusText.innerHTML = '<strong>Loading AI model…</strong> First time only, takes a few seconds.';
+
+    originalImg.src = URL.createObjectURL(file);
+
+    try {
+      const config = {
+        progress: (key, current, total) => {
+          if (total > 0) {
+            const pct = Math.round((current / total) * 100);
+            progressFill.style.width = pct + '%';
+            if (key.includes('model') || key.includes('fetch')) {
+              statusText.innerHTML = `<strong>Downloading AI model…</strong> ${pct}% — cached after this`;
+            } else {
+              statusText.innerHTML = `<strong>Removing background…</strong> ${pct}%`;
+            }
+          }
+        }
+      };
+
+      statusText.innerHTML = '<strong>Removing background…</strong> AI is processing your image.';
+      const blob = await removeBackground(file, config);
+      const resultUrl = URL.createObjectURL(blob);
+
+      progressFill.style.width = '100%';
+      resultImg.src = resultUrl;
+      downloadBtn.href = resultUrl;
+
+      statusBox.classList.remove('show');
+      resultSection.classList.add('show');
+      busy = false;
+
+    } catch (err) {
+      console.error(err);
+      showError('Could not process this image. Please try a different file or refresh the page.');
+    }
+  }
+</script>
+
+</body>
+</html>
