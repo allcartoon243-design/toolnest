@@ -6,60 +6,50 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const HF_TOKEN = process.env.HF_TOKEN;
-  if (!HF_TOKEN) return res.status(500).json({ error: 'HF_TOKEN not set in environment variables' });
+  const GROQ_API_KEY = process.env.GROQ_API_KEY;
+  if (!GROQ_API_KEY) return res.status(500).json({ error: 'GROQ_API_KEY not configured' });
 
   const { text, mode } = req.body || {};
   if (!text || text.trim().length === 0) return res.status(400).json({ error: 'No text provided' });
 
   const prompts = {
-    paraphrase: `Paraphrase this text, return only the rewritten text:\n\n${text}`,
-    formal: `Rewrite in formal tone, return only the rewritten text:\n\n${text}`,
-    casual: `Rewrite in casual tone, return only the rewritten text:\n\n${text}`,
-    shorter: `Make this text shorter, return only the rewritten text:\n\n${text}`,
-    longer: `Expand this text, return only the rewritten text:\n\n${text}`,
-    grammar: `Fix grammar errors, return only the corrected text:\n\n${text}`,
+    paraphrase: `Paraphrase the following text. Return only the rewritten text, nothing else:\n\n${text}`,
+    formal: `Rewrite in a formal professional tone. Return only the rewritten text, nothing else:\n\n${text}`,
+    casual: `Rewrite in a casual friendly tone. Return only the rewritten text, nothing else:\n\n${text}`,
+    shorter: `Make this text shorter and concise. Return only the rewritten text, nothing else:\n\n${text}`,
+    longer: `Expand this text with more detail. Return only the rewritten text, nothing else:\n\n${text}`,
+    grammar: `Fix all grammar and spelling errors. Return only the corrected text, nothing else:\n\n${text}`,
   };
 
   const prompt = prompts[mode] || prompts.paraphrase;
 
   try {
-    const response = await fetch(
-      'https://api-inference.huggingface.co/models/HuggingFaceH4/zephyr-7b-beta',
-      {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${HF_TOKEN}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          inputs: prompt,
-          parameters: {
-            max_new_tokens: 512,
-            temperature: 0.7,
-            return_full_text: false,
-          },
-        }),
-      }
-    );
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${GROQ_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'llama-3.1-8b-instant',
+        messages: [{ role: 'user', content: prompt }],
+        temperature: 0.7,
+        max_tokens: 1024,
+      }),
+    });
 
-    const responseText = await response.text();
+    const data = await response.json();
 
     if (!response.ok) {
-      return res.status(500).json({ error: `HF Error ${response.status}: ${responseText}` });
+      return res.status(500).json({ error: data?.error?.message || 'Groq API error' });
     }
 
-    let data;
-    try { data = JSON.parse(responseText); }
-    catch(e) { return res.status(500).json({ error: 'Invalid JSON from HF: ' + responseText }); }
+    const result = data?.choices?.[0]?.message?.content?.trim();
+    if (!result) return res.status(500).json({ error: 'Empty response from AI' });
 
-    const raw = Array.isArray(data) ? data[0]?.generated_text : data?.generated_text;
-    if (!raw) return res.status(500).json({ error: 'Empty response. Raw: ' + responseText });
-
-    const result = raw.replace(/<s>|<\/s>|\[INST\]|\[\/INST\]/g, '').trim();
     return res.status(200).json({ result });
 
   } catch (err) {
-    return res.status(500).json({ error: 'Fetch failed: ' + err.message });
+    return res.status(500).json({ error: 'Request failed: ' + err.message });
   }
 }
