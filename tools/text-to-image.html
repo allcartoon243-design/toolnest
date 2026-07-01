@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Text to Image Generator – Free AI Tool | ToolNest</title>
+  <meta name="description" content="Generate free AI images from text. Choose from realistic, anime, painting and more styles. No signup, no watermarks, 100% free."/>
+  <link rel="canonical" href="https://toolnest-steel.vercel.app/tools/text-to-image"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet"/>
+  <script src="https://pl30116577.effectivecpmnetwork.com/76/b5/bb/76b5bbd94501d12ae8d6648b945fb7eb.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg: #0a0a0f; --surface: #13131a; --surface2: #1c1c28; --border: #2a2a3a; --accent: #6c63ff; --accent2: #a78bfa; --green: #22d3a5; --text: #f0f0f8; --muted: #8888aa; --radius: 14px; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; }
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(10,10,15,0.85); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 0 24px; display: flex; align-items: center; gap: 12px; height: 60px; }
+    .logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.3rem; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
+    .nav-sep { color: var(--border); }
+    .nav-current { color: var(--muted); font-size: 0.85rem; }
+    .back-btn { margin-left: auto; color: var(--muted); font-size: 0.82rem; text-decoration: none; border: 1px solid var(--border); padding: 5px 12px; border-radius: 8px; transition: all 0.2s; }
+    .back-btn:hover { border-color: var(--accent); color: var(--accent2); }
+    main { max-width: 780px; margin: 0 auto; padding: 48px 24px 80px; }
+    .tool-badge { display: inline-flex; background: rgba(108,99,255,0.12); border: 1px solid rgba(108,99,255,0.3); color: var(--accent2); font-size: 0.75rem; font-weight: 600; padding: 4px 12px; border-radius: 99px; margin-bottom: 12px; letter-spacing: 0.04em; }
+    h1 { font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+    .tool-desc { color: var(--muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 28px; }
+    .form-group { margin-bottom: 20px; }
+    .form-label { font-size: 0.82rem; font-weight: 600; color: var(--muted); margin-bottom: 8px; display: block; letter-spacing: 0.04em; text-transform: uppercase; }
+    .form-textarea { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; color: var(--text); font-family: inherit; font-size: 0.95rem; outline: none; transition: border-color 0.2s; resize: vertical; min-height: 100px; line-height: 1.6; }
+    .form-textarea:focus { border-color: var(--accent); }
+    .styles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; margin-bottom: 20px; }
+    .style-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px 10px; cursor: pointer; text-align: center; transition: all 0.2s; }
+    .style-card:hover { border-color: var(--accent); }
+    .style-card.active { border-color: var(--accent); background: rgba(108,99,255,0.1); }
+    .style-icon { font-size: 1.6rem; margin-bottom: 6px; }
+    .style-name { font-size: 0.78rem; font-weight: 600; color: var(--text); }
+    .style-desc { font-size: 0.68rem; color: var(--muted); margin-top: 2px; }
+    .size-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+    .size-chip { padding: 8px 16px; border-radius: 99px; font-size: 0.82rem; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: var(--surface2); color: var(--muted); transition: all 0.2s; }
+    .size-chip.active { border-color: var(--accent); color: var(--accent2); background: rgba(108,99,255,0.1); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 28px; border-radius: 10px; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.2s; border: none; width: 100%; }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), #8b5cf6); color: white; }
+    .btn-primary:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(108,99,255,0.35); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .spinner { width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; display: inline-block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .result-box { display: none; margin-top: 28px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+    .result-box.show { display: block; }
+    .result-img { width: 100%; display: block; }
+    .result-actions { padding: 16px; display: flex; gap: 10px; justify-content: center; border-top: 1px solid var(--border); }
+    .btn-success { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, var(--green), #10b981); color: #0a0a0f; font-weight: 700; padding: 10px 24px; border-radius: 10px; border: none; cursor: pointer; font-size: 0.9rem; text-decoration: none; transition: all 0.2s; }
+    .btn-success:hover { transform: translateY(-1px); }
+    .btn-outline { display: inline-flex; align-items: center; gap: 8px; background: transparent; border: 1px solid var(--border); color: var(--muted); padding: 10px 20px; border-radius: 10px; cursor: pointer; font-size: 0.9rem; transition: all 0.2s; }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent2); }
+    .error-box { display: none; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.25); border-radius: 10px; padding: 12px 16px; margin-top: 12px; color: #ff8080; font-size: 0.88rem; }
+    .error-box.show { display: block; }
+    .loading-box { display: none; text-align: center; padding: 60px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-top: 28px; }
+    .loading-box.show { display: block; }
+    .loading-spinner { width: 48px; height: 48px; border: 4px solid rgba(108,99,255,0.2); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
+    .loading-text { color: var(--muted); font-size: 0.9rem; }
+    .loading-text strong { color: var(--text); display: block; margin-bottom: 4px; font-size: 1rem; }
+    .info-strip { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+    .info-chip { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; font-size: 0.78rem; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+    .ad-slot { background: var(--surface); border: 1px dashed var(--border); border-radius: var(--radius); padding: 12px; text-align: center; color: var(--muted); font-size: 0.75rem; min-height: 90px; display: flex; align-items: center; justify-content: center; margin: 32px 0; }
+    footer { text-align: center; padding: 32px 24px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.82rem; }
+    footer a { color: var(--accent2); text-decoration: none; }
+  </style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="/">🛠 ToolNest</a>
+  <span class="nav-sep">/</span>
+  <span class="nav-current">Text to Image</span>
+  <a class="back-btn" href="/">← All Tools</a>
+</nav>
+<main>
+  <div class="tool-badge">🎨 AI Powered · Free</div>
+  <h1>🎨 Text to Image Generator</h1>
+  <p class="tool-desc">Turn your words into stunning AI-generated images. Choose a style and describe what you want to see.</p>
+
+  <div class="form-group">
+    <label class="form-label">Describe your image</label>
+    <textarea class="form-textarea" id="promptInput" placeholder="e.g. A beautiful sunset over mountains, golden hour, dramatic clouds..."></textarea>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Style</label>
+    <div class="styles-grid" id="stylesGrid">
+      <div class="style-card active" onclick="setStyle(this, '')">
+        <div class="style-icon">✨</div>
+        <div class="style-name">Default</div>
+        <div class="style-desc">AI decides</div>
+      </div>
+      <div class="style-card" onclick="setStyle(this, 'photorealistic, professional photography, 8k')">
+        <div class="style-icon">📷</div>
+        <div class="style-name">Realistic</div>
+        <div class="style-desc">Photo-like</div>
+      </div>
+      <div class="style-card" onclick="setStyle(this, 'anime style, manga, japanese animation, vibrant colors')">
+        <div class="style-icon">🎌</div>
+        <div class="style-name">Anime</div>
+        <div class="style-desc">Japanese style</div>
+      </div>
+      <div class="style-card" onclick="setStyle(this, 'oil painting, classical art, painterly, canvas texture')">
+        <div class="style-icon">🖼️</div>
+        <div class="style-name">Painting</div>
+        <div class="style-desc">Oil & canvas</div>
+      </div>
+      <div class="style-card" onclick="setStyle(this, 'digital art, concept art, detailed illustration, trending on artstation')">
+        <div class="style-icon">💻</div>
+        <div class="style-name">Digital Art</div>
+        <div class="style-desc">Concept art</div>
+      </div>
+      <div class="style-card" onclick="setStyle(this, 'watercolor painting, soft colors, delicate brushstrokes')">
+        <div class="style-icon">🎨</div>
+        <div class="style-name">Watercolor</div>
+        <div class="style-desc">Soft & dreamy</div>
+      </div>
+      <div class="style-card" onclick="setStyle(this, '3d render, cinema 4d, octane render, realistic lighting')">
+        <div class="style-icon">🧊</div>
+        <div class="style-name">3D Render</div>
+        <div class="style-desc">CGI style</div>
+      </div>
+      <div class="style-card" onclick="setStyle(this, 'pixel art, 16-bit, retro game style, pixelated')">
+        <div class="style-icon">👾</div>
+        <div class="style-name">Pixel Art</div>
+        <div class="style-desc">Retro game</div>
+      </div>
+      <div class="style-card" onclick="setStyle(this, 'pencil sketch, hand drawn, black and white illustration')">
+        <div class="style-icon">✏️</div>
+        <div class="style-name">Sketch</div>
+        <div class="style-desc">Pencil drawn</div>
+      </div>
+      <div class="style-card" onclick="setStyle(this, 'cinematic, movie still, dramatic lighting, film photography')">
+        <div class="style-icon">🎬</div>
+        <div class="style-name">Cinematic</div>
+        <div class="style-desc">Movie style</div>
+      </div>
+      <div class="style-card" onclick="setStyle(this, 'fantasy art, magical, epic, detailed fantasy illustration')">
+        <div class="style-icon">🧙</div>
+        <div class="style-name">Fantasy</div>
+        <div class="style-desc">Magical world</div>
+      </div>
+      <div class="style-card" onclick="setStyle(this, 'minimalist, simple, clean design, flat illustration')">
+        <div class="style-icon">⬜</div>
+        <div class="style-name">Minimalist</div>
+        <div class="style-desc">Clean & simple</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Image Size</label>
+    <div class="size-row">
+      <div class="size-chip active" onclick="setSize(this, 1024, 1024)">1:1 Square</div>
+      <div class="size-chip" onclick="setSize(this, 1280, 720)">16:9 Landscape</div>
+      <div class="size-chip" onclick="setSize(this, 720, 1280)">9:16 Portrait</div>
+      <div class="size-chip" onclick="setSize(this, 1200, 628)">Social Media</div>
+    </div>
+  </div>
+
+  <button class="btn btn-primary" id="generateBtn" onclick="generateImage()">🎨 Generate Image</button>
+
+  <div class="error-box" id="errorBox"></div>
+
+  <div class="loading-box" id="loadingBox">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">
+      <strong>AI is creating your image...</strong>
+      This takes 10-30 seconds. Please wait.
+    </div>
+  </div>
+
+  <div class="result-box" id="resultBox">
+    <img class="result-img" id="resultImg" alt="Generated image"/>
+    <div class="result-actions">
+      <a class="btn-success" id="downloadBtn" href="#" download="toolnest-ai-image.png">⬇ Download Image</a>
+      <button class="btn-outline" onclick="generateImage()">🔄 Regenerate</button>
+      <button class="btn-outline" onclick="resetTool()">✏️ New Image</button>
+    </div>
+  </div>
+
+  <div class="info-strip">
+    <div class="info-chip">⚡ Powered by FLUX AI</div>
+    <div class="info-chip">🆓 100% Free</div>
+    <div class="info-chip">🚫 No signup needed</div>
+  </div>
+
+  <div class="ad-slot">Advertisement</div>
+</main>
+<footer>
+  <p>© 2026 <strong style="color:var(--text)">ToolNest</strong> · <a href="/">All Tools</a> · <a href="#">Privacy Policy</a></p>
+</footer>
+<script>
+let selectedStyle = '';
+let imgWidth = 1024, imgHeight = 1024;
+
+function setStyle(el, style) {
+  document.querySelectorAll('.style-card').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  selectedStyle = style;
+}
+
+function setSize(el, w, h) {
+  document.querySelectorAll('.size-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  imgWidth = w;
+  imgHeight = h;
+}
+
+async function generateImage() {
+  const prompt = document.getElementById('promptInput').value.trim();
+  const errorBox = document.getElementById('errorBox');
+  const loadingBox = document.getElementById('loadingBox');
+  const resultBox = document.getElementById('resultBox');
+  const btn = document.getElementById('generateBtn');
+
+  errorBox.classList.remove('show');
+  resultBox.classList.remove('show');
+
+  if (!prompt) {
+    errorBox.textContent = '⚠️ Please describe the image you want to generate.';
+    errorBox.classList.add('show');
+    return;
+  }
+
+  if (prompt.length < 3) {
+    errorBox.textContent = '⚠️ Please write a more detailed description.';
+    errorBox.classList.add('show');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Generating...';
+  loadingBox.classList.add('show');
+
+  // Build final prompt with style
+  const finalPrompt = selectedStyle ? `${prompt}, ${selectedStyle}` : prompt;
+  const encodedPrompt = encodeURIComponent(finalPrompt);
+
+  // Pollinations.ai URL — no API key needed
+  const seed = Math.floor(Math.random() * 999999);
+  const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=${imgWidth}&height=${imgHeight}&seed=${seed}&nologo=true`;
+
+  try {
+    // Load image via Image object to detect errors
+    await new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = resolve;
+      img.onerror = reject;
+      img.src = imageUrl;
+
+      // Timeout after 60 seconds
+      setTimeout(() => reject(new Error('Timeout — please try again')), 60000);
+    });
+
+    // Image loaded successfully
+    const resultImg = document.getElementById('resultImg');
+    resultImg.src = imageUrl;
+    resultImg.crossOrigin = 'anonymous';
+
+    // Download button
+    document.getElementById('downloadBtn').onclick = async (e) => {
+      e.preventDefault();
+      try {
+        const response = await fetch(imageUrl);
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'toolnest-ai-image.png';
+        a.click();
+        URL.revokeObjectURL(url);
+      } catch {
+        // Fallback — open in new tab
+        window.open(imageUrl, '_blank');
+      }
+    };
+
+    loadingBox.classList.remove('show');
+    resultBox.classList.add('show');
+
+  } catch (err) {
+    loadingBox.classList.remove('show');
+    errorBox.textContent = '⚠️ ' + (err.message || 'Could not generate image. Please try again.');
+    errorBox.classList.add('show');
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = '🎨 Generate Image';
+}
+
+function resetTool() {
+  document.getElementById('promptInput').value = '';
+  document.getElementById('resultBox').classList.remove('show');
+  document.getElementById('errorBox').classList.remove('show');
+  document.getElementById('promptInput').focus();
+}
+</script>
+</body>
+</html>
