@@ -1,30 +1,29 @@
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://toolnest-steel.vercel.app');
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { text, mode } = req.body;
+  const HF_TOKEN = process.env.HF_TOKEN;
+  if (!HF_TOKEN) return res.status(500).json({ error: 'HF_TOKEN not set in environment variables' });
 
+  const { text, mode } = req.body || {};
   if (!text || text.trim().length === 0) return res.status(400).json({ error: 'No text provided' });
-  if (text.length > 5000) return res.status(400).json({ error: 'Text too long. Max 5000 characters.' });
 
   const prompts = {
-    paraphrase: `Paraphrase the following text. Keep the same meaning but use different words and sentence structures. Return only the rewritten text, no explanations:\n\n${text}`,
-    formal: `Rewrite the following text in a formal, professional tone. Return only the rewritten text, no explanations:\n\n${text}`,
-    casual: `Rewrite the following text in a casual, friendly, conversational tone. Return only the rewritten text, no explanations:\n\n${text}`,
-    shorter: `Rewrite the following text in a shorter, more concise way while keeping the main points. Return only the rewritten text, no explanations:\n\n${text}`,
-    longer: `Expand and elaborate the following text to make it longer and more detailed. Return only the rewritten text, no explanations:\n\n${text}`,
-    grammar: `Fix all grammar, spelling, and punctuation errors in the following text. Keep the original meaning and style. Return only the corrected text, no explanations:\n\n${text}`,
+    paraphrase: `Paraphrase this text, return only the rewritten text:\n\n${text}`,
+    formal: `Rewrite in formal tone, return only the rewritten text:\n\n${text}`,
+    casual: `Rewrite in casual tone, return only the rewritten text:\n\n${text}`,
+    shorter: `Make this text shorter, return only the rewritten text:\n\n${text}`,
+    longer: `Expand this text, return only the rewritten text:\n\n${text}`,
+    grammar: `Fix grammar errors, return only the corrected text:\n\n${text}`,
   };
 
   const prompt = prompts[mode] || prompts.paraphrase;
 
   try {
-    const HF_TOKEN = process.env.HF_TOKEN;
-
     const response = await fetch(
       'https://api-inference.huggingface.co/models/HuggingFaceH4/zephyr-7b-beta',
       {
@@ -34,9 +33,9 @@ export default async function handler(req, res) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          inputs: `<s>[INST] ${prompt} [/INST]`,
+          inputs: prompt,
           parameters: {
-            max_new_tokens: 1024,
+            max_new_tokens: 512,
             temperature: 0.7,
             return_full_text: false,
           },
@@ -44,25 +43,23 @@ export default async function handler(req, res) {
       }
     );
 
-    if (response.status === 503) {
-      return res.status(503).json({ error: 'AI model is loading, please try again in 20 seconds.' });
-    }
+    const responseText = await response.text();
 
     if (!response.ok) {
-      const err = await response.text();
-      throw new Error('HuggingFace API error: ' + err);
+      return res.status(500).json({ error: `HF Error ${response.status}: ${responseText}` });
     }
 
-    const data = await response.json();
+    let data;
+    try { data = JSON.parse(responseText); }
+    catch(e) { return res.status(500).json({ error: 'Invalid JSON from HF: ' + responseText }); }
+
     const raw = Array.isArray(data) ? data[0]?.generated_text : data?.generated_text;
-    if (!raw) throw new Error('No response from AI');
+    if (!raw) return res.status(500).json({ error: 'Empty response. Raw: ' + responseText });
 
     const result = raw.replace(/<s>|<\/s>|\[INST\]|\[\/INST\]/g, '').trim();
-
     return res.status(200).json({ result });
 
   } catch (err) {
-    console.error('HF error:', err.message);
-    return res.status(500).json({ error: err.message || 'Something went wrong. Please try again.' });
+    return res.status(500).json({ error: 'Fetch failed: ' + err.message });
   }
 }
